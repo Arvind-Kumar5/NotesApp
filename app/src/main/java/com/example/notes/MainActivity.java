@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-
     public void clickFunction(View view){
         EditText personText = (EditText) findViewById(R.id.editTextTextPersonName);
         EditText passText = (EditText) findViewById(R.id.editTextTextPersonName2);
@@ -21,17 +20,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("username", person).apply();
 
-
-        goToScreen2(person, password);
-    }
-
-    public void goToScreen2(String person, String password){
-
         Intent intent = new Intent(this, Screen2.class);
-
-        intent.putExtra("person", person);
-        intent.putExtra("password", password);
-
         startActivity(intent);
     }
 
@@ -46,11 +35,19 @@ public class MainActivity extends AppCompatActivity {
         if(!sharedPreferences.getString(usernameKey,"").equals("")){
 
             String username = sharedPreferences.getString(usernameKey,"");
+            System.out.println("IN HERE");
 
             Intent intent = new Intent(this, Screen2.class);
             intent.putExtra("person", username);
+            startActivity(intent);
         }
 
-        setContentView(R.layout.activity_main);
+        else{
+            System.out.println("DO ACTIVITY 1");
+            setContentView(R.layout.activity_main);
+        }
+
+
+
     }
 }
